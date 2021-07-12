@@ -2,15 +2,25 @@ const Quote = require('../models/quote');
 
 
 module.exports = {
-    quotes: async function() {
+    quotes: async function () {
         const quotes = Quote.find();
         return {
             quotes: quotes.map((q) => {
                 return {
                     ...q._doc,
-                    _id: q._id.toString()
+                    _id: q._id.toString(),
                 }
             })
         }
+    },
+    createQuote: async function ({ quoteInput }) {
+        const quote = new Quote({
+            quote: quoteInput.quote,
+            author: quoteInput.author
+        })
+
+        const createQuote = await quote.save();
+
+        return createQuote;
     }
 }

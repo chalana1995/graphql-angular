@@ -6,11 +6,11 @@ const Schema = mongoose.Schema;
 const quoteSchema = new Schema({
     quote: {
         type: String,
-        rquired: true
+        required: true
     },
     author: {
         type: String,
-        rquired: true
+        required: true
     }
 })
 
