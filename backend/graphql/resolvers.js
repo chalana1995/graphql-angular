@@ -6,10 +6,7 @@ module.exports = {
         const quotes = Quote.find();
         return {
             quotes: quotes.map((q) => {
-                return {
-                    ...q._doc,
-                    _id: q._id.toString(),
-                }
+                return q;
             })
         }
     },
@@ -22,5 +19,28 @@ module.exports = {
         const createQuote = await quote.save();
 
         return createQuote;
+    },
+    updateQuote: async function ({ id, quoteInput }) {
+        const quote = await Quote.findById(id);
+
+        if (!quote) {
+            throw new Error("No quote found !")
+        }
+        quote.quote = quoteInput.quote;
+        quote.author = quoteInput.author;
+
+        const updatedQuote = await quote.save();
+
+        return updatedQuote;
+    },
+    deleteQuote: async function ({ id }) {
+        const quote = await Quote.findById(id);
+
+        if (!quote) {
+            throw new Error("No quote found !")
+        }
+        const deleteQuote = await Quote.findByIdAndRemove(id);
+
+        return deleteQuote;
     }
 }

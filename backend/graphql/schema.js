@@ -19,6 +19,8 @@ type RootQuery {
 }
 type RootMutation {
     createQuote(quoteInput: QuoteInputData): Quote!
+    updateQuote(id: ID!, quoteInput: QuoteInputData): Quote!
+    deleteQuote(id:ID!): Quote!
 }
 schema {
      query: RootQuery
